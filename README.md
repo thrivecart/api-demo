@@ -1,6 +1,8 @@
 # thrivecart-api-demo
 Clone the repository, run `composer install` and then run it locally to view and use the demo, and get started with the `index.php` file.
 
+You can also see [thrivecart-php-api](https://github.com/MarcFowler/thrivecart-php-api/) repository for the underlying library documentation.
+
 # ThriveCart API
 All responses will always be JSON-encoded. If an `error` key exists, it will contain details of the error in question which you can use.
 
@@ -21,7 +23,7 @@ The library will throw Exceptions which you can intercept and handle as normal. 
 <?php
 require 'vendor/autoload.php'; // Include Composer
 
-$tc = new \ThriveCart\Api('30d91fbae081c8ca9ab0e41990d0227d20d63a3c'); // Pass our access token into the API to get started; see OAuth examples for details
+$tc = new \ThriveCart\Api('30d91fbae081c8ca9ab0e41990d0227d20d63a3c'); // Pass our access token into the API to get started; see OAuth examples for details on how to connect
 
 // Get a list of all products in the account
 try {
@@ -33,14 +35,7 @@ try {
   die('An error occurred: '.$e->getMessage());
 }
 
-// Get a single product in the account, identified by it's ID
-try {
-  $product = $tc->getProduct(345435);
-  print_r($product);
-} catch(\ThriveCart\Exception $e) {
-  die('An error occurred: '.$e->getMessage());
-}
-
+// Get a single product in the account, identified by ID
 try {
   $product = $tc->getProduct(123456789);
 } catch(\ThriveCart\Exception $e) {
