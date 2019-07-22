@@ -13,7 +13,7 @@ Permission is granted using OAuth 2. Our access tokens do not require refreshing
 ## Getting your client ID & client secret
 The ThriveCart API is currently by invitation only. You can [contact us at support](https://support.thrivecart.com) to request access.
 
-Your use of the API will be monitored, and is rate-limited to 100 requests per minute. Contact us to request an increase on this limit.
+Your use of the API will be monitored, and is rate-limited to 60 requests per minute, per account that your application is connected to. This should be more than enough for normal usage, but you can contact us to discuss and request an increase if needed.
 
 ## Exceptions
 The library will throw Exceptions which you can intercept and handle as normal. See below for some examples. The message obtained by `getMessage();` is user-readable and safe to display to users.
