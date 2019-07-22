@@ -1,5 +1,12 @@
 {
+	"minimum-stability": "dev",
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/marcfowler/thrivecart-php-api"
+      }
+    ],
     "require": {
-        "league/oauth2-client": "^2.4"
+        "marcfowler/thrivecart-php-api": "*"
     }
 }

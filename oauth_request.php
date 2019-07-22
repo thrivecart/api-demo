@@ -1,5 +1,5 @@
 <?php
-require('config.php');
+include 'bootstrap.php';
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -28,9 +28,12 @@ require('config.php');
 			try {
 			  $resourceOwner = $provider->getResourceOwner($accessToken);
 			} catch(Exception $e) {
-				switch($e->getMessage()) {
+				switch(strtolower($e->getMessage())) {
 					case 'invalid_token':
 						die('<p>Error! You have revoked access to your ThriveCart account. Click the button below to re-connect.</p><a class="button" href="index.php">Click here to connect to ThriveCart</a>');
+						break;
+					case 'unauthorized':
+						die('<p>Error! This access token does not appear to be valid. Click the button below to re-connect.</p><a class="button" href="index.php">Click here to connect to ThriveCart</a>');
 						break;
 					default:
 						die('<p>An unknown error occurred: '.$e->getMessage().'</p><a class="button" href="index.php">Click here to connect to ThriveCart</a>');
@@ -50,19 +53,19 @@ require('config.php');
 
 			echo '<h6>List of products in the account</h6>';
 			echo '<pre>';
-			$request = $provider->getAuthenticatedRequest(
-			    'GET',
-			    'http://dev-thrivecart.com/api/external/products',
-			    $accessToken
-			);
+			// Initialise our API instance, passing it this access token
+			$tc = new \ThriveCart\Api($accessToken);
 
-			$client = new GuzzleHttp\Client();
-			$response = $client->send($request);
+			// Let's get a list of all the live products in the account
+			try {
+				$products = $tc->getProducts(array(
+					'status' => 'live',
+				));
 
-			// print_r($response->getBody());
-			print_r(json_decode($response->getBody()));
-			// print_r($response->getHeaders());
-
+				print_r($products);
+			} catch(\ThriveCart\Exception $e) {
+				echo 'There was an error loading your list of products: '.$e->getMessage();
+			}
 			echo '</pre>';
 
 			echo '<h6>Revoke access</h6>';

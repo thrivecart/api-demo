@@ -6,8 +6,8 @@
 // This single file handles all of the connection - reporting errors, redirecting to go and get permission, and then storing the access token if successful
 // Let's get started!
 
-// First, let's include our libraries etc
-require('config.php');
+// First, let's include our common code
+include 'bootstrap.php';
 
 // Now let's decide what to do - the 3 options are:
 // 1. If there is an error, we'll display that to the user (this happens if they click the 'cancel' button and do not grant permission, etc)

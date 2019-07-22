@@ -1,53 +1,57 @@
 # thrivecart-api-demo
-Clone the repository and run it locally to view and use the demo, and get started with the `index.php` file.
+Clone the repository, run `composer install` and then run it locally to view and use the demo, and get started with the `index.php` file.
 
 # ThriveCart API
-All responses will always be JSON-encoded. If an `error` key exists, it will contain details of the error in question which you can use. See below for details.
+All responses will always be JSON-encoded. If an `error` key exists, it will contain details of the error in question which you can use.
 
 See `index.php`, `oauth_example.php` and `oauth_request.php` for examples on connecting and gaining permission to access a ThriveCart user's account.
 
-Permission is granted using OAuth 2. Our access tokens do not require refreshing. A user can revoke your platform's access from inside their ThriveCart account, so you will need to handle errors.
+Permission is granted using OAuth 2. Our access tokens do not require refreshing. A user can revoke your platform's access from inside their ThriveCart account, so you will need to handle the permissions being revoked.
 
 ## Getting your client ID & client secret
 The ThriveCart API is currently by invitation only. You can [contact us at support](https://support.thrivecart.com) to request access.
 
-## Errors
-If the `error` key exists, it will contain a string explaining the type of error. These authorisation errors are outlined below.
+Your use of the API will be monitored, and is rate-limited to 100 requests per minute. Contact us to request an increase on this limit.
 
-* `method.invalid` The method you requested does not exist; check your request URL and ensure it's a valid endpoint (see below for documentation)
-* `method.exception` The method returned an error. A key `reason` will be included, with a string explaining the problem, which can be displayed to your users
+## Exceptions
+The library will throw Exceptions which you can intercept and handle as normal. See below for some examples. The message obtained by `getMessage();` is user-readable and safe to display to users.
 
-# Resources
-## Products
-Endpoint: `/api/external/products`  
-#### GET
-Returns a list of all active products
-```json
-[{
-  "product_id":"999",
-  "name":"Example Product",
-  "url":"https:\/\/dfr.thrivecart.com\/example-product\/",
-  "type":"standard",
-  "mode":"test"
-}, {
-  "product_id":"111",
-  "name":"Second Product",
-  "url":"https:\/\/dfr.thrivecart.com\/second-product\/",
-  "type":"standard",
-  "mode":"live"
-}]
-```
+# Example usage in PHP
+```php
+<?php
+require 'vendor/autoload.php'; // Include Composer
 
-## Product
-Endpoint: `/api/external/products/[product_id]`  
-#### GET
-Return details about a specific checkout/product
-```json
-[{
-  "product_id":"999",
-  "name":"Example Product",
-  "url":"https:\/\/dfr.thrivecart.com\/example-product\/",
-  "type":"standard",
-  "mode":"test"
-}]
+$tc = new \ThriveCart\Api('30d91fbae081c8ca9ab0e41990d0227d20d63a3c'); // Pass our access token into the API to get started; see OAuth examples for details
+
+// Get a list of all products in the account
+try {
+  $products = $tc->getProducts(array(
+   'status' => 'live', // Change to 'test' for test-mode products, or omit entirely for all products
+  ));
+  print_r($products);
+} catch(\ThriveCart\Exception $e) {
+  die('An error occurred: '.$e->getMessage());
+}
+
+// Get a single product in the account, identified by it's ID
+try {
+  $product = $tc->getProduct(345435);
+  print_r($product);
+} catch(\ThriveCart\Exception $e) {
+  die('An error occurred: '.$e->getMessage());
+}
+
+try {
+  $product = $tc->getProduct(123456789);
+} catch(\ThriveCart\Exception $e) {
+  switch ($e->getCode()) {
+    case '404':
+      die('The requested product cannot not found.');
+      break;
+    
+    default:
+      die('Unknown error: '.$e->getMessage());
+      break;
+  }
+}
 ```

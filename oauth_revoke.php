@@ -1,5 +1,5 @@
 <?php
-require('config.php');
+include 'bootstrap.php';
 
 if(!isset($_GET['access_token'])) die('No token provided: <a href="oauth.php">Click here to start the flow</a>');
 
@@ -12,7 +12,7 @@ $accessToken = new \League\OAuth2\Client\Token\AccessToken(array('access_token' 
 echo '<br /><br />Revoke response<br /><pre>';
 $request = $provider->getAuthenticatedRequest(
     'POST',
-    'http://thrivec.ddns.net/authorization/revoke',
+    'https://thrivecart.com/authorization/revoke',
     $accessToken,
     array(
       'body' => json_encode(array('token' => $access_token)),
