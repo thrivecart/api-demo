@@ -8,3 +8,5 @@ $provider = new \ThriveCart\Oauth([
 	'clientSecret' => 'examplepass', // Your application's client secret
 	'redirectUri' => 'http://localhost/thrivecart-api-demo/oauth_example.php', // URL to be redirected to after OAuth acceptance
 ]);
+
+\ThriveCart\Api::setMode('test'); // @note Remove this line to switch to live mode, but note, you will be performing real actions (refunds, cancellations, etc)

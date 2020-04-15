@@ -17,6 +17,11 @@ The ThriveCart API is currently by invitation only. You can [contact us at suppo
 
 Your use of the API will be monitored, and is rate-limited to 60 requests per minute, per account that your application is connected to. This should be more than enough for normal usage, but you can contact us to discuss and request an increase if needed.
 
+## Switching out of test mode
+By default, this example suite (not the underlying SDK) runs in test mode. This is specified in the `bootstrap.php` file. When you're ready with your integration, remove that line to switch to live mode.
+
+To enable browsing test mode transactions in your ThriveCart dashboard, go to Settings -> Account-wide -> Finances, and toggle the option to switch between live and test modes. Then, at the bottom of your Transactions list, you will be able to switch between these two modes. Actions performed in test mode do not use real funds, and rely on Stripe's test mode. Authorize.net and PayPal do not provide usable test modes, but your interaction with them via API will be the same.
+
 ## Exceptions
 The library will throw Exceptions which you can intercept and handle as normal. See below for some examples. The message obtained by `getMessage();` is user-readable and safe to display to users.
 
