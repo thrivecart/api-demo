@@ -52,7 +52,7 @@ include 'bootstrap.php';
 			echo '</pre>';
 
 			echo '<h6>List of products in the account</h6>';
-			echo '<pre>';
+			echo '<pre style="max-height: 20em;">';
 			// Initialise our API instance, passing it this access token
 			$tc = new \ThriveCart\Api($accessToken);
 
@@ -68,8 +68,13 @@ include 'bootstrap.php';
 			}
 			echo '</pre>';
 
+			echo '<h6>Examples</h6>';
+			echo '<p><a href="examples/index.php?access_token='.$accessToken.'">Click here to view the list of examples</a> and how to use the various API methods.</p>';
+
+			echo '<hr />';
+
 			echo '<h6>Revoke access</h6>';
-			echo '<a href="oauth_revoke.php?access_token='.$access_token.'">Click here to revoke access to this account</a>';
+			echo '<p><a href="oauth_revoke.php?access_token='.$access_token.'">Click here to revoke access to this account</a> and remove your API access.</p>';
 			?>
 		</div>
 	</section>

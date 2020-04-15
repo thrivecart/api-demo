@@ -1,7 +1,9 @@
 # thrivecart-api-demo
-Clone the repository, run `composer install` and then run it locally to view and use the demo, and get started with the `index.php` file.
+Clone the repository, run `composer install` and then run it locally to view and use the demo, and get started with the `oauth_example.php` file.
 
-You can also see [thrivecart-php-api](https://github.com/MarcFowler/thrivecart-php-api/) repository for the underlying library documentation.
+You can also see [thrivecart-php-api](https://github.com/MarcFowler/thrivecart-php-api/) repository for the underlying library.
+
+We also provide [Postman-powered examples of all API requests](https://documenter.getpostman.com/view/11065483/Szf26qmb?version=latest#intro) which can be read to see examples in languages other than PHP. Note that authorisation via the Bearer header is required.
 
 # ThriveCart API
 All responses will always be JSON-encoded. If an `error` key exists, it will contain details of the error in question which you can use.
@@ -27,26 +29,37 @@ $tc = new \ThriveCart\Api('30d91fbae081c8ca9ab0e41990d0227d20d63a3c'); // Pass o
 
 // Get a list of all products in the account
 try {
-  $products = $tc->getProducts(array(
-   'status' => 'live', // Change to 'test' for test-mode products, or omit entirely for all products
-  ));
-  print_r($products);
+	$products = $tc->getProducts(array(
+		'status' => 'live', // Change to 'test' for test-mode products, or omit entirely for all products
+	));
+	print_r($products);
 } catch(\ThriveCart\Exception $e) {
-  die('An error occurred: '.$e->getMessage());
+	die('An error occurred: '.$e->getMessage());
 }
 
 // Get a single product in the account, identified by ID
 try {
-  $product = $tc->getProduct(123456789);
+	$product = $tc->getProduct(123456789);
 } catch(\ThriveCart\Exception $e) {
-  switch ($e->getCode()) {
-    case '404':
-      die('The requested product cannot not found.');
-      break;
-    
-    default:
-      die('Unknown error: '.$e->getMessage());
-      break;
-  }
+	switch ($e->getCode()) {
+		case '404':
+			die('The requested product cannot not found.');
+			break;
+
+		default:
+			die('Unknown error: '.$e->getMessage());
+			break;
+	}
+}
+
+// Switch to operating in test mode
+\ThriveCart\Api::setMode('test');
+
+try {
+	$customer = $tc->customer(array(
+		'email' => 'examplecustomer@thrivecart.com', // Pass in a customer email to load their details, as well as purchases and subscriptions
+	));
+} catch(\ThriveCart\Exception $e) {
+	die('An error occurred: '.$e->getMessage());
 }
 ```
