@@ -1,2 +1,3 @@
 main { margin-top: 2em; margin-bottom: 2em; }
 main section.container + section.container { margin-top: 2em; }
+.output-debug { overflow: auto; max-height: 50vh; }

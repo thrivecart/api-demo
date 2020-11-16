@@ -34,7 +34,7 @@ if(!empty($_POST['email'])) {
 
 						echo '<td>';
 							if(is_array($value)) { // The value may be an array of sub-keys, for instance in the case of an address or shipping address
-								echo '<pre>';
+								echo '<pre class="output-debug">';
 									print_r($value);
 								echo '</pre>';
 							} else {

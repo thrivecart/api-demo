@@ -12,6 +12,8 @@ include 'inc.header.php';
 // See the customer info example to see how to obtain these parameters from a customer's list of purchases or subscriptions
 if(empty($_GET['order_id']) || empty($_GET['subscription_id'])) {
 	echo '<div class="notification is-danger is-light">You must provide an order ID and subscription ID to cancel a subscription. These can be found in the responses from order searching, or from pulling up a customer\'s info. Navigate to the customer example for a full demo of how to cancel a subscription.</div>';
+	echo '<hr/>';
+	echo '<p><a href="index.php?access_token='.$access_token.'">&laquo; Go back</a> to the examples list.</p>';
 	return;
 }
 

@@ -47,7 +47,7 @@ include 'bootstrap.php';
 			echo '<hr/>';
 
 			echo '<h6>Account/user information</h6>';
-			echo '<pre>';
+			echo '<pre class="output-debug">';
 			var_export($resourceOwner->toArray());
 			echo '</pre>';
 

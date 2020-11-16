@@ -2,7 +2,7 @@
 include '../bootstrap.php';
 
 // These parameters are just for the example site
-$example_name = 'Order search';
+$example_name = 'Search affiliates';
 include 'inc.header.php';
 ?>
 
@@ -24,10 +24,10 @@ if(!empty($_POST['query'])) {
 
 	// Now let's make our API request
 	try {
-		$response = $tc->transactions(array(
+		$response = $tc->affiliates(array(
 			// Filters
 			'query' => $query,
-			'transactionType' => 'any', // @note This can be 'any', 'charge', 'refund', 'rebill', 'cancel' - the returned list of transactions will include a transaction_type that has one of these values also
+			// 'product_id' => 123, // Numeric product ID to search for only affiliates who have applied/are approved for that product
 
 			// Pagination
 			'page' => $page,
@@ -36,7 +36,7 @@ if(!empty($_POST['query'])) {
 
 		// Let's output these results - they could be formatted in a table, a list, etc
 		echo '<pre class="output-debug">';
-			print_r($response['transactions']);
+			print_r($response['affiliates']);
 		echo '</pre>';
 
 		// Are there more pages of results?
@@ -47,28 +47,40 @@ if(!empty($_POST['query'])) {
 			echo '<hr/>';
 			echo '<p>There are <b>'.$remaining_pages.' more page(s)</b> of results.</p>';
 		}
+
+		// Let's also display a list of links to the 'example_affiliate.php' example, which shows how to look up a single, specific affiliate
+		if(!empty($response['affiliates'])) {
+			echo '<h6>View individual affiliate</h6>';
+			echo '<ul>';
+				foreach($response['affiliates'] as $affiliate) {
+					echo '<li>';
+						echo '<a href="example_affiliate.php?access_token='.$access_token.'&affiliate_id='.$affiliate['affiliate_id'].'">View affiliate &quot;<b>'.$affiliate['affiliate_id'].'</b>&quot;</a>';
+					echo '</li>';
+				}
+			echo '</ul>';
+		}
 	} catch(\ThriveCart\Exception $e) {
-		echo '<div class="notification is-danger is-light">There was an error while searching through your transactions: '.$e->getMessage().'</div>';
+		echo '<div class="notification is-danger is-light">There was an error while searching through your affiliates: '.$e->getMessage().'</div>';
 	}
 }
 
 // We have no incoming search request, so let's output a simple form to search for a customer's email or info
 if(empty($_POST['query'])) {
 	echo '<article class="message is-info"><div class="message-body">';
-		echo 'In this example, we can search through our list of transactions much like how the Transactions page inside of ThriveCart operates. Enter a search query to begin.<br/><b>Important:</b> a <i>much</i> easier-to-use endpoint for information on a specific, individual customer can be found in the <a href="example_customer.php?access_token='.$access_token.'">customer info</a> example.';
+		echo 'In this example, we can search through our list of affiliates much like how the My Affiliates page inside of ThriveCart operates. Enter a search query to begin.<br/><b>Important:</b> you can also see the <code>example_affiliate.php</code> example to view an individual affiliate.';
 	echo '</div></article>';
 
-	echo '<form action="example_order_search.php?access_token='.$access_token.'" method="post">';
+	echo '<form action="example_affiliates.php?access_token='.$access_token.'" method="post">';
 		echo '<div class="field">';
 			echo '<label class="label">Enter a search query or email address..</label>';
 			echo '<div class="control">';
-				echo '<input class="input" type="text" placeholder="customer@example.com" name="query" />';
+				echo '<input class="input" type="text" placeholder="myaffiliate@example.com" name="query" />';
 			echo '</div>';
 		echo '</div>';
 
 		echo '<div class="field is-grouped">';
 			echo '<div class="control">';
-				echo '<button class="button is-link">Search for orders</button>';
+				echo '<button class="button is-link">Search for affiliates</button>';
 			echo '</div>';
 		echo '</div>';
 

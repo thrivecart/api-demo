@@ -64,7 +64,7 @@ if(isset($_GET['error'])) { // Option 1 above
         $resourceOwner = $provider->getResourceOwner($accessToken);
 
         echo 'Owner information:<br />';
-        echo '<pre>';
+        echo '<pre class="output-debug">';
         var_export($resourceOwner->toArray());
         echo '</pre>';
 
@@ -73,7 +73,7 @@ if(isset($_GET['error'])) { // Option 1 above
     } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
 
         // Failed to get the access token or user details.
-        echo '<pre>';
+        echo '<pre class="output-debug">';
         print_r($e);
         exit('Error: '.$e->getMessage());
 

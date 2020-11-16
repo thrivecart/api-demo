@@ -1,9 +1,9 @@
 # thrivecart-api-demo
-Clone the repository, run `composer install` and then run it locally to view and use the demo, and get started with the `oauth_example.php` file.
+Clone the repository, run `composer install` and then run it locally to view and use the demo.
 
-You can also see [thrivecart-php-api](https://github.com/MarcFowler/thrivecart-php-api/) repository for the underlying library.
+You can also see the [thrivecart/php-api](https://github.com/thrivecart/php-api/) repository for the underlying library.
 
-We also provide [Postman-powered examples of all API requests](https://documenter.getpostman.com/view/11065483/Szf26qmb?version=latest#intro) which can be read to see examples in languages other than PHP. Note that authorisation via the Bearer header is required.
+Check out [our developer site](https://developers.thrivecart.com/) for more information, or our [interactive API reference](https://apidocs.thrivecart.com) for full details of all available methods, and the ability to generate examples in languages other than PHP.
 
 # ThriveCart API
 All responses will always be JSON-encoded. If an `error` key exists, it will contain details of the error in question which you can use.
@@ -12,10 +12,10 @@ See `index.php`, `oauth_example.php` and `oauth_request.php` for examples on con
 
 Permission is granted using OAuth 2. Our access tokens do not require refreshing. A user can revoke your platform's access from inside their ThriveCart account, so you will need to handle the permissions being revoked.
 
-## Getting your client ID & client secret
-The ThriveCart API is currently by invitation only. You can [contact us at support](https://support.thrivecart.com) to request access.
+## Getting your client credentials
+See [our developer site](https://developers.thrivecart.com/) to register an application or to see how to create an API key to access your own ThriveCart account.
 
-Your use of the API will be monitored, and is rate-limited to 60 requests per minute, per account that your application is connected to. This should be more than enough for normal usage, but you can contact us to discuss and request an increase if needed.
+Your use of the API will be monitored, and is rate-limited to 60 requests per minute, per account that your application is connected to. This should be more than enough for normal usage, but you can contact us to discuss and request an increase if needed. Note that we do not preemptively increase rate limits.
 
 ## Switching out of test mode
 By default, this example suite (not the underlying SDK) runs in test mode. This is specified in the `bootstrap.php` file. When you're ready with your integration, remove that line to switch to live mode.
@@ -26,11 +26,13 @@ To enable browsing test mode transactions in your ThriveCart dashboard, go to Se
 The library will throw Exceptions which you can intercept and handle as normal. See below for some examples. The message obtained by `getMessage();` is user-readable and safe to display to users.
 
 # Example usage in PHP
+_See the `examples/` directory for many more examples_
+
 ```php
 <?php
 require 'vendor/autoload.php'; // Include Composer
 
-$tc = new \ThriveCart\Api('30d91fbae081c8ca9ab0e41990d0227d20d63a3c'); // Pass our access token into the API to get started; see OAuth examples for details on how to connect
+$tc = new \ThriveCart\Api('30d91fbae081c8ca9ab0e41990d0227d20d63a3c'); // Pass in your access token or API key
 
 // Get a list of all products in the account
 try {
