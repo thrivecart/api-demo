@@ -1,5 +1,5 @@
 {
     "require": {
-        "marcfowler/thrivecart-php-api": "^1.0"
+        "thrivecart/php-api": "^1.0"
     }
 }
