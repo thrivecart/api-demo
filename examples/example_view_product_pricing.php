@@ -2,7 +2,7 @@
 include '../bootstrap.php';
 
 // These parameters are just for the example site
-$example_name = 'View product';
+$example_name = 'View product pricing options';
 include 'inc.header.php';
 ?>
 
@@ -17,7 +17,7 @@ if(!empty($_GET['product_id'])) {
 
 	// Now let's make our API request
 	try {
-		$response = $tc->getProduct($product_id, array(
+		$response = $tc->getProductPricing($product_id, array(
 			//
 		));
 
@@ -25,13 +25,6 @@ if(!empty($_GET['product_id'])) {
 		echo '<pre class="output-debug">';
 			print_r($response);
 		echo '</pre>';
-
-		echo '<h6>View pricing options</h6>';
-		echo '<ul>';
-			echo '<li>';
-				echo '<a href="example_view_product_pricing.php?access_token='.$access_token.'&product_id='.$response['product_id'].'">View pricing options for &quot;<b>'.$response['name'].'</b>&quot;</a>';
-			echo '</li>';
-		echo '</ul>';
 	} catch(\ThriveCart\Exception $e) {
 		echo '<div class="notification is-danger is-light">There was an error while looking up an individual product: '.$e->getMessage().'</div>';
 	}

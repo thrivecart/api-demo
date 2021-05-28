@@ -37,6 +37,19 @@ include 'inc.header.php';
 	<li><a href="example_affiliate.php?access_token=<?php echo $_GET['access_token']; ?>">View an individual affiliate</a></li>
 </ul>
 
+<h6>Advanced affiliate management <span class="tag is-info">New!</span></h6>
+<ul>
+	<li><a href="example_affiliate_create.php?access_token=<?php echo $_GET['access_token']; ?>">Create a new affiliate</a></li>
+	<li><a href="example_affiliate_favorite.php?access_token=<?php echo $_GET['access_token']; ?>">Mark an affiliate as a favorite/VIP</a></li>
+	<li><a href="example_affiliate_unfavorite.php?access_token=<?php echo $_GET['access_token']; ?>">Un-favorite an affiliate</a></li>
+	<li><a href="example_affiliate_register.php?access_token=<?php echo $_GET['access_token']; ?>">Register an affiliate for a product</a></li>
+	<li><a href="example_affiliate_approve.php?access_token=<?php echo $_GET['access_token']; ?>">Approve a pending affiliate application</a></li>
+	<li><a href="example_affiliate_reject.php?access_token=<?php echo $_GET['access_token']; ?>">Reject a pending affiliate application or revoke access to a product</a></li>
+	<li><a href="example_affiliate_get_commissions.php?access_token=<?php echo $_GET['access_token']; ?>">Read affiliate commissions for a product</a></li>
+	<li><a href="example_affiliate_custom_commissions.php?access_token=<?php echo $_GET['access_token']; ?>">Specify custom commissions for an affiliate</a> <span class="tag is-primary">Advanced</span></li>
+	<li><a href="example_affiliate_delete.php?access_token=<?php echo $_GET['access_token']; ?>">Delete an affiliate</a></li>
+</ul>
+
 <h6>Event subscriptions</h6>
 <ul>
 	<li><a href="example_event_subscription.php?access_token=<?php echo $_GET['access_token']; ?>">Subscribe to an event</a> <span class="tag is-primary">Advanced</span></li>
