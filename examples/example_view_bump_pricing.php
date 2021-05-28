@@ -17,7 +17,7 @@ if(!empty($_GET['bump_id'])) {
 
 	// Now let's make our API request
 	try {
-		$response = $tc->getBump($bump_id, array(
+		$response = $tc->getBumpPricing($bump_id, array(
 			//
 		));
 
@@ -25,13 +25,6 @@ if(!empty($_GET['bump_id'])) {
 		echo '<pre class="output-debug">';
 			print_r($response);
 		echo '</pre>';
-
-		echo '<h6>View pricing options</h6>';
-		echo '<ul>';
-			echo '<li>';
-				echo '<a href="example_view_bump_pricing.php?access_token='.$access_token.'&bump_id='.$response['bump_id'].'">View pricing options for &quot;<b>'.$response['name'].'</b>&quot;</a>';
-			echo '</li>';
-		echo '</ul>';
 	} catch(\ThriveCart\Exception $e) {
 		echo '<div class="notification is-danger is-light">There was an error while looking up an individual bump: '.$e->getMessage().'</div>';
 	}

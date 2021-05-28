@@ -27,7 +27,10 @@ if(!empty($_GET['action']) && $_GET['action'] === 'unsubscribe') {
 		echo '<div class="notification is-danger is-light">There was an error while removing this event subscription: '.$e->getMessage().'</div>';
 	}
 } else {
-	$target_url = trim(urldecode($_GET['target_url']));
+	$target_url = '';
+	if(isset($_GET['target_url'])) {
+		$target_url = trim(urldecode($_GET['target_url']));
+	}
 
 	echo '<div class="notification is-danger is-light">This example will remove an event subscription. Check out the <a href="https://developers.thrivecart.com/documentation/event_subscription/intro/">developer documentation</a> to learn more about event subscriptions, and if you are ready to continue, <a href="example_event_unsubscribe.php?access_token='.$access_token.'&action=unsubscribe&target_url='.urlencode($target_url).'">click here to continue</a>!</div>';
 }
