@@ -16,8 +16,20 @@ include 'inc.header.php';
 	- Pay a percentage, which is due to be paid manually after 7 days
 	{"type": "percentage", "payout_schedule": "manual", "balance_delay": 7, "upfront_percentage": 10.31, "bump_percentage": 49.9994}
 	
-	- Pay a precentage, which has 10% paid out immediately, and then the remaining amounts after 90 days
+	- Pay a percentage, which has 10% paid out immediately, and then the remaining amounts after 90 days
 	{"type": "percentage", "payout_schedule": "partial", "upfront_payout_percentage": 10, "balance_delay": 90, "upfront_percentage": 23, "bump_percentage": 25}
+
+	- Pay on a particular day of the month
+	{"type": "fixed", "payout_schedule": "accrue_date", "payment_date": 31, "upfront_amount": 1000, "bump_amount": 2000}
+
+	- Pay once a certain number of sales are made
+	{"type": "fixed", "payout_schedule": "accrue_sales", "required_sales": 16, "upfront_amount": 1000, "bump_amount": 2000}
+
+	- Pay once a certain dollar value of commissions are earned ($5000)
+	{"type": "percentage", "payout_schedule": "accrue_amount", "required_value": 500000, "upfront_percentage": 15, "bump_percentage": 15}
+
+	- Pay out in bulk once $2500 in commissions are earned
+	{"type": "percentage", "payout_schedule": "accrue_amount", "required_value": 250000, "upfront_percentage": 15, "bump_percentage": 15, "aggregate_type": "bulk"}
 
 */
 
