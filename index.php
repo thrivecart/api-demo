@@ -25,7 +25,7 @@
 
 			<p>If you're developing within your own account, you can simply head to the Settings area inside of ThriveCart, then click on "API & webhooks", and then "API tokens". If you're developing an application designed for other users to consume, you'll first want to go and <a href="https://developers.thrivecart.com/apps/">create your application</a> and get your credentials.</p>
 
-			<p>Learn more about <a href="https://developers.thrivecart.com/documentation/intro/authentication-via-api-key/">authenticating via API key</a>, or <a href="https://developers.staging.thrivecart.com/documentation/intro/authentication-via-oauth">authenticating via OAuth</a>.</p>
+			<p>Learn more about <a href="https://developers.thrivecart.com/documentation/intro/authentication-via-api-key/">authenticating via API key</a>, or <a href="https://developers.thrivecart.com/documentation/intro/authentication-via-oauth">authenticating via OAuth</a>.</p>
 
 			<p>Note: your use of the API will be rate limited to 60 requests per minute, per account that you are connected to. This should be more than enough for normal usage, but if you are frequently going over this limit, please contact us and we can review. Note that we do not increase rate limits preemptively.</p>
 
